@@ -61,14 +61,16 @@ def main():
         times = info[0].text
         times = times.split(" x ")
 
+    campeonato = soup.find(class_='equipe').text
     info = info[1].text
     info = info.split('\xa0')
     info.remove(' ')
     while '' in info:
         info.remove('')
 
-    print("\033[1;%dm%s X \033[1;%dm%s\033[0m\n%s\n%s"
-          % (tcores[0], times[0], tcores[1], times[1], info[0], info[1]))
+    print("\033[1;%dm%s X \033[1;%dm%s\033[0m\n%s\n%s\n%s"
+          % (tcores[0], times[0], tcores[1], times[1],
+             campeonato, info[0], info[1]))
 
 
 if __name__ == '__main__':
