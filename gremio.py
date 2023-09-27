@@ -42,20 +42,16 @@ def imprime(times, campeonato, info, tcores, formato):
     '''imprime a string do bagulho'''
     match formato:
         case 1:
-            print("%s X %s" % (times[0], times[1]))
+            print(f"{times[0]} X {times[1]}")
         case 2:
-            print("%s X %s: %s" % (times[0], times[1], info[0]))
+            print(f"{times[0]} X {times[1]}: {info[0]}")
         case 3:
-            print("%s X %s (%s): %s"
-                  % (times[0], times[1], campeonato, info[0]))
+            print(f"{times[0]} X {times[1]} ({campeonato}): {info[0]}")
         case 4:
-            print("%s X %s: %s- %s"
-                  % (times[0], times[1], info[0], info[1]))
-        case 5:
-            print("%s X %s (%s): %s- %s"
-                  % (times[0], times[1], campeonato, info[0], info[1]))
+            print(f"{times[0]} X {times[1]} ({campeonato}): " +
+                  f"{info[0]}- {info[1]}")
         case _:
-            print("\033[1;%dm%s X \033[1;%dm%s\033[0m\n%s\n%s\n%s"
+            print("\033[1;%dm%s \033[0mX \033[1;%dm%s\033[0m\n%s\n%s\n%s"
                   % (tcores[0], times[0], tcores[1], times[1],
                      campeonato, info[0], info[1]))
 

@@ -18,5 +18,4 @@ Há três parâmetros que podem ser utilizados para modificar o comportamento do
     - 1: mostra apenas o nome dos times;
     - 2: mostra o nome dos times, data e horário;
     - 3: mostra o nome dos times, campeonato, data e horário;
-    - 3: mostra o nome dos times, data, horário e estádio;
     - 4: mostra o nome dos times, campeonato, data, horário e estádio.
