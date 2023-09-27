@@ -26,13 +26,38 @@ def pega_parametros():
     '''pega os parametros especificados pelo usuario'''
     extenso = False
     cores = False
-    for parametro in sys.argv:
-        if '--extenso' in parametro:
+    formato = 0
+    for param in sys.argv:
+        if '-extenso' in param:
             extenso = True
-        if '--cores' in parametro:
+        if '-cores' in param:
             cores = True
+        if '-formato' in param:
+            formato = int(param.split('=')[1])
 
-    return (extenso, cores)
+    return [extenso, cores, formato]
+
+
+def imprime(times, campeonato, info, tcores, formato):
+    '''imprime a string do bagulho'''
+    match formato:
+        case 1:
+            print("%s X %s" % (times[0], times[1]))
+        case 2:
+            print("%s X %s: %s" % (times[0], times[1], info[0]))
+        case 3:
+            print("%s X %s (%s): %s"
+                  % (times[0], times[1], campeonato, info[0]))
+        case 4:
+            print("%s X %s: %s- %s"
+                  % (times[0], times[1], info[0], info[1]))
+        case 5:
+            print("%s X %s (%s): %s- %s"
+                  % (times[0], times[1], campeonato, info[0], info[1]))
+        case _:
+            print("\033[1;%dm%s X \033[1;%dm%s\033[0m\n%s\n%s\n%s"
+                  % (tcores[0], times[0], tcores[1], times[1],
+                     campeonato, info[0], info[1]))
 
 
 def main():
@@ -44,7 +69,7 @@ def main():
     dados = requests.get(pagina, headers=cabecalho, timeout=1)
     soup = BeautifulSoup(dados.text, 'html.parser')
 
-    extenso, cores = pega_parametros()
+    extenso, cores, formato = pega_parametros()
 
     info = soup.find_all(class_='info')
 
@@ -68,9 +93,7 @@ def main():
     while '' in info:
         info.remove('')
 
-    print("\033[1;%dm%s X \033[1;%dm%s\033[0m\n%s\n%s\n%s"
-          % (tcores[0], times[0], tcores[1], times[1],
-             campeonato, info[0], info[1]))
+    imprime(times, campeonato, info, tcores, formato)
 
 
 if __name__ == '__main__':
